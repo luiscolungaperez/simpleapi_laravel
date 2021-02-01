@@ -16,21 +16,17 @@ class MessageController extends Controller
 
         $type = $request->type;
         $reference = $request->reference;
-        $number = $request->number;
-        $message = $request->message;
         $response = $request->response;
-        $sendDate = $request->send_date;
-        $responseDate = $request->response_date;
 
-        // $callback = \DB::table('message')->where('reference', "$reference")
-        //     ->update(['response' => "$response"]);
+        if($type == "response") {
+            $callback = \DB::table('message')->where('reference', "$reference")
+                ->update(['response' => "$response"]);
 
-        $callback = \DB::update("UPDATE message SET response = ? WHERE reference = ?", [$response, $reference]);
-
-        if ($callback == 1) {
-            return "Actualizado correctamente";
-        } else {
-            return "Error al modificar los cambios";
+            if ($callback == 1) {
+                return "Actualizado correctamente";
+            } else {
+                return "Error al modificar los cambios";
+            }
         }
 
     }
