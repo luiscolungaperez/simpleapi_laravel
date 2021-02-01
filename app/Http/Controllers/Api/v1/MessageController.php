@@ -22,7 +22,7 @@ class MessageController extends Controller
         $sendDate = $request->send_date;
         $responseDate = $request->response_date;
 
-        $response = \DB::update("update message set response = $response where reference = ?", [$reference]);
+        $respuesta = \DB::update("update message set response = $response where reference = ?", [$reference]);
 
         // $arreglo = [
         //     "type"=> $type,
@@ -34,7 +34,7 @@ class MessageController extends Controller
         //     "response_date"=> $responseDate
         // ];
 
-        return $response;
+        return $respuesta;
     }
 
 }
