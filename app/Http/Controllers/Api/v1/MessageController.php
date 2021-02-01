@@ -22,8 +22,10 @@ class MessageController extends Controller
         $sendDate = $request->send_date;
         $responseDate = $request->response_date;
 
-        $callback = \DB::table('message')->where('reference', "$reference")
-            ->update(['response' => "$response"]);
+        // $callback = \DB::table('message')->where('reference', "$reference")
+        //     ->update(['response' => "$response"]);
+
+        $callback = \DB::update("UPDATE message SET response = '?' WHERE reference = '?'", [$response, $reference]);
 
         if ($callback == 1) {
             return "Actualizado correctamente";
