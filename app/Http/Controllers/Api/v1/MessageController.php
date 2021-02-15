@@ -20,7 +20,10 @@ class MessageController extends Controller
 
         if($type == "response") {
             $callback = \DB::table('message')->where('reference', "$reference")
-                ->update(['response' => "$response"]);
+                ->update([
+                    'response' => "$response",
+                    'status' => 1
+                ]);
 
             if ($callback == 1) {
                 return "Actualizado correctamente";
