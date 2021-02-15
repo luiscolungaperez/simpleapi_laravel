@@ -18,8 +18,10 @@ class MessageController extends Controller
         $reference = $request->reference;
         $response = $request->response;
 
-        if($type == "response") {
-            $callback = \DB::table('message')->where('reference', "$reference")
+        if($type == "confirmation") {
+            $confirmation = \DB::insert('INSERT INTO message_response (reference, confirmation) values (?, ?)', [$reference, $type]);
+        } elseif ($type == "response") {
+            $callback = \DB::table('message_response')->where('reference', "$reference")
                 ->update(['response' => "$response"]);
 
             if ($callback == 1) {
