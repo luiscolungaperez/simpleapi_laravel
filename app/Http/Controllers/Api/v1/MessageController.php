@@ -18,11 +18,22 @@ class MessageController extends Controller
         $reference = $request->reference;
         $response = $request->response;
 
+        if($type == "confirmation"){
+            $callback = \DB::table('message')->where('reference', "$reference")
+                ->update(['status' => 1]);
+
+            if ($callback == 1) {
+                return "Actualizado correctamente";
+            } else {
+                return "Error al modificar los cambios";
+            }
+        }
+
         if($type == "response") {
             $callback = \DB::table('message')->where('reference', "$reference")
                 ->update([
                     'response' => "$response",
-                    'status' => 1
+                    'status' => 2
                 ]);
 
             if ($callback == 1) {
